@@ -135,7 +135,7 @@ The ADK Agent implements an explicit dual-routing pattern in [`agents/hello_agen
 
 ## 5. Quick Start Summary
 
-Below is a high-level summary of the 7 tasks executed to deploy and verify the architecture. For the complete commands, payloads, and outputs, see **[`RUNBOOK.md`](RUNBOOK.md)**.
+Below is a high-level summary of the 8 tasks executed to deploy, verify, and clean up the architecture. For the complete commands, payloads, and outputs, see **[`RUNBOOK.md`](RUNBOOK.md)**.
 
 1. **Task 1 — Environment Preparation**: Export project/organization variables, generate the `aiplatform.googleapis.com` Service Agent, install `google-agents-cli==0.6.1` and `terraform`, and initialize the Terraform workspace.
 2. **Task 2 — Base Infrastructure Deployment**: Apply Terraform with `enable_iap_enforcement=false` and `enable_model_armor=false` to provision the VPC, subnet, PSC Network Attachment (`gateway-egress-na`), and Agent Gateway (`gateway-egress`).
@@ -150,6 +150,7 @@ Below is a high-level summary of the 7 tasks executed to deploy and verify the a
 7. **Task 7 — Verify Inline Content Safety & PII Redaction**:
    - Test an adversarial prompt injection attack and confirm `HTTP 403` intervention by Model Armor.
    - Test an employee record containing a Social Security Number (`555-01-9999`) and confirm automatic redaction to `[US_SOCIAL_SECURITY_NUMBER]`.
+8. **Task 8 — Clean Up Lab Resources (Required)**: Execute `~/scripts/lab-cleanup.sh` to delete the Vertex AI Reasoning Engine (`4355036090126565376`), gateway authorization policies (`agw-iap-authz-policy`, `agw-model-armor-authz-policy`), and Agent Gateway (`gateway-egress`).
 
 ---
 

@@ -483,6 +483,35 @@ curl -s -X POST \
 
 ---
 
+## Task 8: Clean Up Lab Resources (Required)
+
+> **Caution:** Only run this cleanup script after verifying and scoring all previous tasks (Tasks 1–7). Agent Gateway resources have regional quota limits, and this script releases the Agent Runtime reasoning engine, gateway authorization policies, and Agent Gateway.
+
+```bash
+chmod +x ~/scripts/lab-cleanup.sh
+~/scripts/lab-cleanup.sh
+```
+
+#### Verified Cleanup Output
+```text
+CLEANUP-SCRIPT START
+Target Project: qwiklabs-gcp-01-ed42bdf8e894
+Target Region:  us-central1
+--------------------------------------------------
+[1/3] Deleting Agent Runtime reasoning engine(s)...
+  -> Deleting Reasoning Engine: 4355036090126565376
+[2/3] Deleting Authz Policies attached to the gateway...
+  -> Deleting Authz Policy: agw-iap-authz-policy
+  -> Deleting Authz Policy: agw-model-armor-authz-policy
+[3/3] Deleting Agent Gateways in region us-central1...
+  -> Deleting Agent Gateway: gateway-egress
+--------------------------------------------------
+Agent Gateways successfully cleared.
+CLEANUP-SCRIPT END
+```
+
+---
+
 ## Troubleshooting & Key Architectural Notes
 
 1. **Agent Gateway Service Extensions IAM**: When attaching `google_network_services_authz_extension` to `gateway-egress`, the dynamically generated Service Extensions service account (`agent_gateway_card[0].service_extensions_service_account`) requires `roles/modelarmor.user` and `roles/modelarmor.calloutUser` (`module.gateway.google_project_iam_member.service_extensions_sa`).
